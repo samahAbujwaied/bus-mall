@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+  }
+  h1 {
+    text-align: center;
+  }
+  img {
+    display: block;
+    width: 150px;
+    float: left;
+    height: 150px;
+    border: 2px solid lightblue;
+  }
+  #image-container {
+    padding-left: 100px;
+    border: 2px solid black;
+    width: 900px;
+    margin: 0 auto;
+    height: 175px;
+  }
+  #leftImg,
+  #rightImg,#middleImg {
+    width: 200px;
+    margin: 10px;
+   
+    border-radius: 10px;
+  }
+  span {
+    margin-left: 50px;
+  }
+  #attempts {
+    margin-left: 20px;
+    font-size: 30px;
+  }
+  button{
+      margin: 20px;
+      Margin: 0 auto;
+      padding: 20px;
+      background-color: antiquewhite;
+      font-size: 19px;
+      font-weight: bolder;
+      border-radius: 20px;
+  }
