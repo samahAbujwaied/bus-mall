@@ -75,24 +75,27 @@ function handelClicks(event) {
         }
         renderImg();
     } else {
+        
        let ViewResults=document.getElementById('button');
        let buttonIt = document.createElement('button');
        ViewResults.appendChild(buttonIt);
        buttonIt.textContent='View Results';
-       buttonIt.onclick(buttonfun)
-       
+       ViewResults.addEventListener('click', function btn() {
+        let ulEl = document.getElementById('results');
+        let liEl;
+        for (let i = 0; i < busmall.length; i++) {
+            liEl = document.createElement('li');
+            ulEl.appendChild(liEl);
+            liEl.textContent = `${busmall[i].busName} has ${busmall[i].views} views and has ${busmall[i].clicks} clicks.`
         }
-        lImgEl.removeEventListener('click', handelClicks);
-        mImgEl.removeEventListener('click', handelClicks);
-        rImgEl.removeEventListener('click', handelClicks);
+        
+        
+       })
+       lImgEl.removeEventListener('click', handelClicks);
+       mImgEl.removeEventListener('click', handelClicks);
+       rImgEl.removeEventListener('click', handelClicks);
+       
+       
+       
     }
-function buttonfun()
-{
-    let ulEl = document.getElementById('results');
-    let liEl;
-    for (let i = 0; i < busmall.length; i++) {
-        liEl = document.createElement('li');
-        ulEl.appendChild(liEl);
-        liEl.textContent = `${busmall[i].busName} has ${busmall[i].views} views and has ${busmall[i].clicks} clicks.`
-   
-}}
+}
