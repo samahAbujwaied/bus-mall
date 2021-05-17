@@ -73,3 +73,11 @@
       height: 600px;
       color: brown;
   }
+  #myChart{
+      background-color: black;
+      margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-top: 30px;
+    }
+

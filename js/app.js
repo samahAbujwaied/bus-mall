@@ -3,6 +3,9 @@ let attempts = 0;
 let maxAttempts = 25;
 let attemptsEl = document.getElementById('attempts');
 let busmall = [];
+let busImagesNames = [];
+let busClicks = [];
+let busViews = [];
 function BusImage(busName) {
     //'cruisin-goat.jpg'.split('.') >>['cruisin-goat','jpg']
     this.busName = busName.split('.')[0];
@@ -10,6 +13,7 @@ function BusImage(busName) {
     this.clicks = 0;
     this.views = 0;
     busmall.push(this);
+    busImagesNames.push(this.busName);
 }
 
 let busImages = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','water-can.jpg','wine-glass.jpg'];
@@ -65,7 +69,6 @@ let ViewResults=document.getElementById('button');
 function handelClicks(event) {
     attempts++;
     if (attempts <= maxAttempts) {
-        console.log(event.target.id)
         if (event.target.id === 'leftImg') {
             busmall[leftImgIndex].clicks++;
         } else if (event.target.id === 'middleImg') {
@@ -82,6 +85,7 @@ function handelClicks(event) {
        ViewResults.appendChild(buttonIt);
        buttonIt.textContent='View Results';
        ViewResults.addEventListener('click',btn);
+       
        lImgEl.removeEventListener('click', handelClicks);
        mImgEl.removeEventListener('click', handelClicks);
        rImgEl.removeEventListener('click', handelClicks); 
@@ -100,11 +104,51 @@ function btn()
         liEl = document.createElement('li');
         ulEl.appendChild(liEl);
         liEl.textContent = `${busmall[i].busName} has ${busmall[i].views} views and has ${busmall[i].clicks} clicks.`
-       let  br = document.createElement('br');
+        busClicks.push(busmall[i].clicks);
+        busViews.push(busmall[i].views); 
+        let  br = document.createElement('br');
         ulEl.appendChild(br);
     }
-  
+    chartRender();
         ViewResults.removeEventListener('click',btn);   
        
 
+}
+function chartRender() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: busImagesNames,
+            datasets: [{
+                label: '# of Clicks',
+                data: busClicks,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 2
+            }, {
+                label: '# of Views',
+                data: busViews,
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 }
