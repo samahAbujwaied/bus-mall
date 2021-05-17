@@ -61,6 +61,7 @@ lImgEl.addEventListener('click', handelClicks);
 mImgEl.addEventListener('click', handelClicks);
 rImgEl.addEventListener('click', handelClicks);
 
+let ViewResults=document.getElementById('button');
 function handelClicks(event) {
     attempts++;
     if (attempts <= maxAttempts) {
@@ -76,41 +77,34 @@ function handelClicks(event) {
         renderImg();
     } else {
         
-       let ViewResults=document.getElementById('button');
+       
        let buttonIt = document.createElement('button');
        ViewResults.appendChild(buttonIt);
        buttonIt.textContent='View Results';
-       ViewResults.addEventListener('click', function () {
-        let ulEl = document.getElementById('results');
-        let liEl;
-        for (let i = 0; i < busmall.length; i++) {
-            liEl = document.createElement('li');
-            ulEl.appendChild(liEl);
-            liEl.textContent = `${busmall[i].busName} has ${busmall[i].views} views and has ${busmall[i].clicks} clicks.`
-           let  br = document.createElement('br');
-            ulEl.appendChild(br);
-        }
-        
-        
-       })
+       ViewResults.addEventListener('click',btn);
        lImgEl.removeEventListener('click', handelClicks);
        mImgEl.removeEventListener('click', handelClicks);
-       rImgEl.removeEventListener('click', handelClicks);
-       ViewResults.removeEventListener('click', function () {
-        let ulEl = document.getElementById('results');
-        let liEl;
-        for (let i = 0; i < busmall.length; i++) {
-            liEl = document.createElement('li');
-            ulEl.appendChild(liEl);
-            liEl.textContent = `${busmall[i].busName} has ${busmall[i].views} views and has ${busmall[i].clicks} clicks.`
-           let  br = document.createElement('br');
-            ulEl.appendChild(br);
-        }
-        
-        
-       })
-       
+       rImgEl.removeEventListener('click', handelClicks); 
        
        
     }
+    
+}
+
+function btn()
+{
+    
+    let ulEl = document.getElementById('results');
+    let liEl;
+    for (let i = 0; i < busmall.length; i++) {
+        liEl = document.createElement('li');
+        ulEl.appendChild(liEl);
+        liEl.textContent = `${busmall[i].busName} has ${busmall[i].views} views and has ${busmall[i].clicks} clicks.`
+       let  br = document.createElement('br');
+        ulEl.appendChild(br);
+    }
+  
+        ViewResults.removeEventListener('click',btn);   
+       
+
 }
