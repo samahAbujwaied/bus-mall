@@ -6,6 +6,8 @@ let busmall = [];
 let busImagesNames = [];
 let busClicks = [];
 let busViews = [];
+let arr=[[0,0,0]];
+
 function BusImage(busName) {
     //'cruisin-goat.jpg'.split('.') >>['cruisin-goat','jpg']
     this.busName = busName.split('.')[0];
@@ -34,17 +36,27 @@ let rImgEl = document.getElementById('rightImg');
 let leftImgIndex;
 let middleImgIndex;
 let rightImgIndex;
-
+let i=0;
 function renderImg() {
     leftImgIndex = generateImage();
     middleImgIndex = generateImage();
     rightImgIndex = generateImage();
-
-    while (leftImgIndex === rightImgIndex || leftImgIndex=== middleImgIndex || middleImgIndex=== rightImgIndex) {
+    i++;
+    
+    
+    
+    while(arr[i-1].includes(leftImgIndex)|| arr[i-1].includes(middleImgIndex) || arr[i-1].includes(rightImgIndex)
+    || leftImgIndex === rightImgIndex || leftImgIndex=== middleImgIndex || middleImgIndex=== rightImgIndex){
         leftImgIndex = generateImage();
-        middleImgIndex=generateImage();
+        middleImgIndex = generateImage();
+        rightImgIndex = generateImage();
+        
+        // console.log(i);  
+           console.log(arr);
+   
     }
-
+    arr.push([leftImgIndex,middleImgIndex,rightImgIndex]);
+   
     lImgEl.setAttribute('src', busmall[leftImgIndex].source);
     lImgEl.setAttribute('title', busmall[leftImgIndex].source);
     busmall[leftImgIndex].views++;
@@ -85,7 +97,6 @@ function handelClicks(event) {
        ViewResults.appendChild(buttonIt);
        buttonIt.textContent='View Results';
        ViewResults.addEventListener('click',btn);
-       
        lImgEl.removeEventListener('click', handelClicks);
        mImgEl.removeEventListener('click', handelClicks);
        rImgEl.removeEventListener('click', handelClicks); 
@@ -109,7 +120,7 @@ function btn()
         let  br = document.createElement('br');
         ulEl.appendChild(br);
     }
-    chartRender();
+        chartRender();
         ViewResults.removeEventListener('click',btn);   
        
 
