@@ -7,6 +7,7 @@ let busImagesNames = [];
 let busClicks = [];
 let busViews = [];
 let arr=[[0,0,0]];
+let busNamclick=[];
 
 function BusImage(busName) {
     //'cruisin-goat.jpg'.split('.') >>['cruisin-goat','jpg']
@@ -16,8 +17,23 @@ function BusImage(busName) {
     this.views = 0;
     busmall.push(this);
     busImagesNames.push(this.busName);
+   
+    
+}
+function BusImageclick(busNameclick) {
+    
+   this.busNameclick=busNameclick;
+   busNamclick.push(this);
+   settingclicks();
+    
 }
 
+function settingclicks(){
+ let setclick=JSON.stringify(busNamclick);
+ localStorage.setItem('clicks',setclick);
+ console.log(setclick);
+
+}
 let busImages = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','water-can.jpg','wine-glass.jpg'];
 
 for (let i = 0; i < busImages.length; i++) {
@@ -83,11 +99,14 @@ function handelClicks(event) {
     if (attempts <= maxAttempts) {
         if (event.target.id === 'leftImg') {
             busmall[leftImgIndex].clicks++;
+            new BusImageclick(busmall[leftImgIndex]);
         } else if (event.target.id === 'middleImg') {
             busmall[middleImgIndex].clicks++;
+            new BusImageclick( busmall[middleImgIndex]);
         }
         else if (event.target.id === 'rightImg') {
             busmall[rightImgIndex].clicks++;
+            new BusImageclick(busmall[rightImgIndex]);
         }
         renderImg();
     } else {
