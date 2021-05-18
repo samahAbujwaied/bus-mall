@@ -7,42 +7,45 @@ let busImagesNames = [];
 let busClicks = [];
 let busViews = [];
 let arr=[[0,0,0]];
-let busNamclick=[];
+// BusImage.busNamclick=[];
 
-function BusImage(busName) {
-    //'cruisin-goat.jpg'.split('.') >>['cruisin-goat','jpg']
+function BusImage(busName) 
+{   
     this.busName = busName.split('.')[0];
     this.source = 'img/' + busName;
     this.clicks = 0;
     this.views = 0;
-    
     busmall.push(this);
-    busImagesNames.push(this.busName);
-   
-    
-}
-function BusImageclick(busNameclick) {
-    
-   this.busNameclick=busNameclick;
-   busNamclick.push(this);
-   settingclicks();
+    busImagesNames.push(this.busName); 
+    // BusImage.busNamclick.push(this);
     
 }
 
-function settingclicks(){
- let setclick=JSON.stringify(busNamclick);
+function settingclicks()
+{
+ let setclick=JSON.stringify(busmall);
  localStorage.setItem('clicks',setclick);
- console.log(setclick);
+}
 
+function gittingclicks()
+{
+    let gitclicks=localStorage.getItem('clicks');
+    let objclick=JSON.parse(gitclicks);
+    if(objclick!==null)
+    {
+        busmall=objclick;
+    }
+    renderImg();
 }
 let busImages = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','water-can.jpg','wine-glass.jpg'];
 
-for (let i = 0; i < busImages.length; i++) {
+for (let i = 0; i < busImages.length; i++) 
+{
     new BusImage(busImages[i]);
 }
 
-function generateImage() {
-    //0-1 >> 0-19
+function generateImage() 
+{
     return Math.floor(Math.random() * busmall.length);
 }
 
@@ -54,24 +57,19 @@ let leftImgIndex;
 let middleImgIndex;
 let rightImgIndex;
 let i=0;
-function renderImg() {
+function renderImg() 
+{
     leftImgIndex = generateImage();
     middleImgIndex = generateImage();
     rightImgIndex = generateImage();
     i++;
-    
-    
-    
     while(arr[i-1].includes(leftImgIndex)|| arr[i-1].includes(middleImgIndex) || arr[i-1].includes(rightImgIndex)
     || leftImgIndex === rightImgIndex || leftImgIndex=== middleImgIndex || middleImgIndex=== rightImgIndex){
         leftImgIndex = generateImage();
         middleImgIndex = generateImage();
         rightImgIndex = generateImage();
-        
-        // console.log(i);  
-           console.log(arr);
-   
     }
+
     arr.push([leftImgIndex,middleImgIndex,rightImgIndex]);
    
     lImgEl.setAttribute('src', busmall[leftImgIndex].source);
@@ -88,6 +86,7 @@ function renderImg() {
     attemptsEl.textContent = attempts;
     
 }
+
 renderImg();
 
 lImgEl.addEventListener('click', handelClicks);
@@ -95,22 +94,28 @@ mImgEl.addEventListener('click', handelClicks);
 rImgEl.addEventListener('click', handelClicks);
 
 let ViewResults=document.getElementById('button');
-function handelClicks(event) {
+
+function handelClicks(event) 
+{
     attempts++;
-    if (attempts <= maxAttempts) {
-        if (event.target.id === 'leftImg') {
+    if (attempts <= maxAttempts) 
+    {
+        if (event.target.id === 'leftImg') 
+        {
             busmall[leftImgIndex].clicks++;
-            new BusImageclick(busmall[leftImgIndex]);
+            
         } else if (event.target.id === 'middleImg') {
             busmall[middleImgIndex].clicks++;
-            new BusImageclick( busmall[middleImgIndex]);
+           
         }
         else if (event.target.id === 'rightImg') {
             busmall[rightImgIndex].clicks++;
-            new BusImageclick(busmall[rightImgIndex]);
+            
         }
         renderImg();
-    } else {
+        settingclicks();
+    } else 
+    {
         
        
        let buttonIt = document.createElement('button');
@@ -131,7 +136,8 @@ function btn()
     
     let ulEl = document.getElementById('results');
     let liEl;
-    for (let i = 0; i < busmall.length; i++) {
+    for (let i = 0; i < busmall.length; i++) 
+    {
         liEl = document.createElement('li');
         ulEl.appendChild(liEl);
         liEl.textContent = `${busmall[i].busName} has ${busmall[i].views} views and has ${busmall[i].clicks} clicks.`
@@ -142,13 +148,15 @@ function btn()
     }
         chartRender();
         ViewResults.removeEventListener('click',btn);   
-       
+      
 
 }
-function chartRender() {
+function chartRender() 
+{
     var ctx = document.getElementById('myChart').getContext('2d');
     
-    var myChart = new Chart(ctx, {
+    var myChart = new Chart(ctx, 
+        {
         type: 'bar',
         data: {
             labels: busImagesNames,
@@ -183,3 +191,4 @@ function chartRender() {
         }
     });
 }
+gittingclicks();
