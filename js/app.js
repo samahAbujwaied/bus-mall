@@ -148,7 +148,7 @@ function btn()
     }
         chartRender();
         ViewResults.removeEventListener('click',btn);   
-       gittingclicks();
+      
 
 }
 function chartRender() 
