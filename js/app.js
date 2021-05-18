@@ -15,6 +15,7 @@ function BusImage(busName) {
     this.source = 'img/' + busName;
     this.clicks = 0;
     this.views = 0;
+    
     busmall.push(this);
     busImagesNames.push(this.busName);
    
