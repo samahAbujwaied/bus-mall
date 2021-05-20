@@ -2,10 +2,13 @@
 let attempts = 0;
 let maxAttempts = 25;
 let attemptsEl = document.getElementById('attempts');
+// include names with clicks and viwes of images 
 let busmall = [];
+// include the name of images
 let busImagesNames = [];
 let busClicks = [];
 let busViews = [];
+// include numbers of generate 
 let arr=[[0,0,0]];
 // BusImage.busNamclick=[];
 
