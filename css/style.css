@@ -69,9 +69,10 @@
       width: 800px;
       display: inline;
       text-align: center;
-      font-size: 20px;
+      font-size: 21px;
       height: 600px;
       color: brown;
+
   }
   #myChart{
       background-color: black;
