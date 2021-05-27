@@ -146,9 +146,13 @@ function btn()
         liEl.textContent = `${busmall[i].busName} has ${busmall[i].views} views and has ${busmall[i].clicks} clicks.`
         busClicks.push(busmall[i].clicks);
         busViews.push(busmall[i].views); 
-        let  br = document.createElement('br');
-        ulEl.appendChild(br);
+        // let  br = document.createElement('br');
+        // ulEl.appendChild(br);
     }
+        let chat = document.getElementById('myChart');
+        chat.style.backgroundColor='black'
+        chat.style.width='800px';
+        chat.style.height='800px';
         chartRender();
         ViewResults.removeEventListener('click',btn);   
       
